@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Property Form - Send to WhatsApp + Google Sheet</title>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background: linear-gradient(120deg, #2c3e50, #4ca1af);
-            color: #f9f9f9;
-        }
-        h2 {
-            text-align: center;
-            color: #f1f1f1;
-            margin-bottom: 20px;
-        }
-        form {
-            background: #333;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            max-width: 600px;
-            margin: auto;
-        }
-        label {
-            display: block;
-            margin-top: 12px;
-            font-weight: bold;
-            color: #f1f1f1;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            background-color: #444;
-            color: #fff;
-        }
-        button {
-            margin-top: 20px;
-            padding: 14px 20px;
-            font-size: 16px;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #1ebd5b;
-        }
-    </style>
+  <title>Property Form</title>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: linear-gradient(120deg, #2c3e50, #4ca1af);
+      color: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+      color: #f1f1f1;
+    }
+    form {
+      background: #333;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background-color: #444;
+      color: #fff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #25D366;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #1ebd5b;
+    }
+  </style>
 </head>
 <body>
 
@@ -61,154 +59,197 @@
 
 <form id="propertyForm">
 
-    <label>Owner / Builder / Agent:</label>
-    <input type="text" name="ownerType" required>
+  <label>Date:</label>
+  <input type="date" name="date" required>
 
-    <label>Name:</label>
-    <input type="text" name="name" required>
+  <label>Owner / Builder / Agent:</label>
+  <input type="text" name="ownerType" required>
 
-    <label>Contact Number:</label>
-    <input type="text" name="contact" required>
+  <label>Name:</label>
+  <input type="text" name="name" required>
 
-    <label>Property Types (2-3-4+ BHK):</label>
-    <input type="text" name="bhkType" required>
+  <label>Contact Number:</label>
+  <input type="text" name="contact" required>
 
-    <label>Property Type:</label>
-    <select name="propertyType" required>
-        <option value="Flat">Flat</option>
-        <option value="Bungalow">Bungalow</option>
-        <option value="Row House">Row House</option>
-        <option value="Plot">Plot</option>
-        <option value="Commercial">Commercial</option>
-    </select>
+  <label>Property Types (2-3-4+ BHK):</label>
+  <input type="text" name="bhkType" required>
 
-    <label>Sale / Rent:</label>
-    <select name="saleRent" required>
-        <option value="Sale">Sale</option>
-        <option value="Rent">Rent</option>
-    </select>
+  <label>Property Type:</label>
+  <select name="propertyType" required>
+    <option>Flat</option>
+    <option>Bungalow</option>
+    <option>Row House</option>
+    <option>Plot</option>
+    <option>Commercial</option>
+  </select>
 
-    <label>Location / Address:</label>
-    <textarea name="address" required></textarea>
+  <label>Sale / Rent:</label>
+  <select name="saleRent" required>
+    <option>Sale</option>
+    <option>Rent</option>
+  </select>
 
-    <label>Flat Sq.ft Area:</label>
-    <input type="text" name="area" required>
+  <label>Location / Address:</label>
+  <textarea name="address" required></textarea>
 
-    <label>Balconies:</label>
-    <input type="text" name="balconies">
+  <label>Flat Sq.ft Area:</label>
+  <input type="text" name="area" required>
 
-    <label>Floor Number & Total Floors:</label>
-    <input type="text" name="floorInfo">
+  <label>Balconies:</label>
+  <input type="text" name="balconies">
 
-    <label>Lift Backup:</label>
-    <select name="liftBackup" required>
-        <option value="Available">Available</option>
-        <option value="Not Available">Not Available</option>
-    </select>
+  <label>Floor Number & Total Floors:</label>
+  <input type="text" name="floorInfo">
 
-    <label>Parking Available:</label>
-    <select name="parking">
-        <option value="Covered">Covered</option>
-        <option value="Open">Open</option>
-        <option value="None">None</option>
-    </select>
+  <label>Lift Backup:</label>
+  <select name="liftBackup" required>
+    <option>Available</option>
+    <option>Not Available</option>
+  </select>
 
-    <label>Furnishing Status:</label>
-    <select name="furnishing" required>
-        <option value="Unfurnished">Unfurnished</option>
-        <option value="Semi-Furnished">Semi-Furnished</option>
-        <option value="Fully Furnished">Fully Furnished</option>
-    </select>
+  <label>Parking Available:</label>
+  <select name="parking">
+    <option>Covered</option>
+    <option>Open</option>
+    <option>None</option>
+  </select>
 
-    <label>Expected Price / Rent:</label>
-    <input type="text" name="price">
+  <label>Furnishing Status:</label>
+  <select name="furnishing" required>
+    <option>Unfurnished</option>
+    <option>Semi-Furnished</option>
+    <option>Fully Furnished</option>
+  </select>
 
-    <label>Age of Property:</label>
-    <input type="text" name="propertyAge">
+  <label>Expected Price / Rent:</label>
+  <input type="text" name="price">
 
-    <label>Facing:</label>
-    <input type="text" name="facing">
+  <label>Age of Property (Years):</label>
+  <input type="text" name="propertyAge">
 
-    <label>Key:</label>
-    <select name="keyStatus" required>
-        <option value="Tenant">Tenant</option>
-        <option value="Owner">Owner</option>
-        <option value="Vacant">Vacant</option>
-    </select>
+  <label>Facing:</label>
+  <input type="text" name="facing">
 
-    <label>Photos / Videos:</label>
-    <textarea name="photos"></textarea>
+  <label>Key (Tenant / Owner / Vacant):</label>
+  <select name="keyStatus" required>
+    <option>Tenant</option>
+    <option>Owner</option>
+    <option>Vacant</option>
+  </select>
 
-    <label>Add on Details:</label>
-    <textarea name="addOn"></textarea>
+  <label>Photos / Videos:</label>
+  <textarea name="photos"></textarea>
 
-    <button type="button" onclick="submitForm()">Send to Google Sheet & WhatsApp</button>
+  <label>Add on Details:</label>
+  <textarea name="addOn"></textarea>
+
+  <button type="button" onclick="sendWhatsApp()">Send on WhatsApp</button>
+  <button type="button" onclick="saveEntry()">Save Entry</button>
+  <button type="button" onclick="downloadExcel()">Download Excel</button>
+  <button type="button" onclick="clearForm()">Clear Form</button>
+
 </form>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzvZf1SzNlYJEyQ9PecVeAP7h31kIFr31_ANkTgXO0hLErajYBAih3B4pa7gn4_2Taq/exec';
+let lastFormData = null;
 
-    function submitForm() {
-        const form = document.getElementById('propertyForm');
-        const formData = new FormData(form);
+function sendWhatsApp() {
+  if (!lastFormData) {
+    alert("⚠️ कृपया आधी 'Save Entry' क्लिक करा!");
+    return;
+  }
 
-        const plainObject = {};
-        formData.forEach((value, key) => {
-            plainObject[key] = value;
-        });
+  const formData = lastFormData;
 
-        fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(plainObject),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            console.log('Sheet Success:', response);
-            sendWhatsApp();
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            alert('Something went wrong!');
-        });
-    }
-
-    function sendWhatsApp() {
-        const form = document.getElementById('propertyForm');
-        const data = new FormData(form);
-        const formData = Object.fromEntries(data.entries());
-
-        const message = `
+  const msg = `
 *PROPERTY DETAILS*
 
-*Owner/ Builder/ Agent:* ${formData.ownerType}
+*Date:* ${formData.date}
+*Owner/Builder/Agent:* ${formData.ownerType}
 *Name:* ${formData.name}
-*Contact Number:* ${formData.contact}
-*Property Types (BHK):* ${formData.bhkType}
+*Contact:* ${formData.contact}
+*BHK Type:* ${formData.bhkType}
 *Property Type:* ${formData.propertyType}
-*Sale / Rent:* ${formData.saleRent}
-*Location / Address:* ${formData.address}
-*Flat Sq.ft Area:* ${formData.area}
+*Sale/Rent:* ${formData.saleRent}
+*Address:* ${formData.address}
+*Area:* ${formData.area}
 *Balconies:* ${formData.balconies}
-*Floor Number & Total Floors:* ${formData.floorInfo}
+*Floor Info:* ${formData.floorInfo}
 *Lift Backup:* ${formData.liftBackup}
-*Parking Available:* ${formData.parking}
-*Furnishing Status:* ${formData.furnishing}
-*Expected Price / Rent:* ${formData.price}
-*Age of Property:* ${formData.propertyAge}
+*Parking:* ${formData.parking}
+*Furnishing:* ${formData.furnishing}
+*Price:* ${formData.price}
+*Property Age:* ${formData.propertyAge}
 *Facing:* ${formData.facing}
 *Key:* ${formData.keyStatus}
-*Photos / Videos:* ${formData.photos}
-*Add on Details:* ${formData.addOn}
+*Photos:* ${formData.photos}
+*Add On:* ${formData.addOn}
 
 _Thank you!_
-        `.trim();
+  `.trim();
 
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
-        window.open(whatsappURL, '_blank');
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/?text=${encoded}`, '_blank');
+}
+
+function saveEntry() {
+  const form = document.getElementById('propertyForm');
+  const data = new FormData(form);
+  const formData = Object.fromEntries(data.entries());
+
+  lastFormData = formData;
+
+  // ✅ Google Sheet ला POST करणं
+  fetch("https://script.google.com/macros/s/AKfycbzvZf1SzNlYJEyQ9PecVeAP7h31kIFr31_ANkTgXO0hLErajYBAih3B4pa7gn4_2Taq/exec", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json"
     }
+  })
+  .then(res => res.text())
+  .then(msg => {
+    alert("✅ Entry Google Sheet मध्ये सेव्ह झाली आहे. आता तुम्ही 'Send on WhatsApp' करू शकता.");
+  })
+  .catch(err => {
+    console.error(err);
+    alert("❌ काहीतरी चुकलं. कृपया परत प्रयत्न करा.");
+  });
+}
+
+function clearForm() {
+  document.getElementById('propertyForm').reset();
+  lastFormData = null;
+  alert("🧹 फॉर्म साफ झाला आहे.");
+}
+
+function downloadExcel() {
+  const entries = JSON.parse(localStorage.getItem("propertyData")) || [];
+  if (entries.length === 0) return alert("⚠ No entries found!");
+
+  const headers = [
+    "Date", "Owner / Builder / Agent", "Name", "Contact Number", "Property Types (2-3-4+ BHK)",
+    "Property Type", "Sale / Rent", "Location / Address", "Flat Sq.ft Area", "Balconies",
+    "Floor Number & Total Floors", "Lift Backup", "Parking Available", "Furnishing Status",
+    "Expected Price / Rent", "Age of Property (Years)", "Facing", "Key (Tenant / Owner / Vacant)",
+    "Photos / Videos", "Add on Details"
+  ];
+
+  const keys = [
+    "date", "ownerType", "name", "contact", "bhkType",
+    "propertyType", "saleRent", "address", "area", "balconies",
+    "floorInfo", "liftBackup", "parking", "furnishing",
+    "price", "propertyAge", "facing", "keyStatus",
+    "photos", "addOn"
+  ];
+
+  const rows = entries.map(entry => keys.map(k => entry[k] || ""));
+
+  const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "PropertyData");
+  XLSX.writeFile(wb, "All_Property_Entries.xlsx");
+}
 </script>
 
 </body>
