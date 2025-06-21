@@ -147,7 +147,6 @@
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxIevJ5PbwZgJRA-OSRJLtBd7B7tnWvvesubJyoyf7cR74ATE0XP1vPkkuQeirn_goK/exec';
-';
 
     function submitForm() {
         const form = document.getElementById('propertyForm');
@@ -158,7 +157,6 @@
             plainObject[key] = value;
         });
 
-        // Google Sheet ला डेटा पाठवतो
         fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(plainObject),
@@ -175,8 +173,6 @@
             alert('Something went wrong!');
         });
     }
-
-
 
     function sendWhatsApp() {
         const form = document.getElementById('propertyForm');
@@ -213,7 +209,7 @@ _Thank you!_
         const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
         window.open(whatsappURL, '_blank');
     }
-
 </script>
+
 </body>
 </html>
